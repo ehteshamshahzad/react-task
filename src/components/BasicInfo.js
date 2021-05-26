@@ -19,7 +19,7 @@ function BasicInfo() {
             // Set time out
             setTimeout(() => {
                 search()
-            }, 150000); // Increase later
+            }, 300000); // 1000 = 1 second
 
         }
     }, [data]);
@@ -71,7 +71,6 @@ function BasicInfo() {
                     <p>{data.current?.humidity}</p>
                     <p>{data.current?.feelslike_c}</p>
 
-
                     <p>list?</p>
                     <div>{data.forecast?.forecastday.map(forcast_day => (
                         <div key={forcast_day.date_epoch}>
@@ -94,13 +93,6 @@ function BasicInfo() {
                 </div>
 
             ) : ('')}
-
-            <button type='button' onClick={() => history.push({
-                pathname: '/forcast',
-                state: {
-                    cityName: query,
-                },
-            })}>More info</button>
         </div >
     );
 }
