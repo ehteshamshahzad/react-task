@@ -1,0 +1,142 @@
+.Style {
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.search-box {
+  width: 100%;
+  text-align: center;
+  display: block;
+  padding-top: 15px;
+  font-size: 20px;
+}
+
+.search-box .search-bar {
+  padding-top: 15px;
+  text-align: center;
+
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2%;
+  color: #313131;
+  font-size: 20px;
+  transition: 0.4s ease;
+}
+
+.search-box .search-bar:focus {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: blue;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 15px;
+  padding: 10px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.container {
+  width: 100%;
+  display: block;
+  justify-content: center;
+}
+
+.container-two {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.group-zero {
+  font-size: 18px;
+  width: 70%;
+  margin-left: 15%;
+  background-color: azure;
+  margin-right: 15%;
+  justify-content: center;
+}
+
+.group-a {
+  font-size: 18px;
+  flex: 1;
+  margin: 10px;
+}
+
+.group-b {
+  flex: 1;
+}
+.group-c {
+  flex: 1;
+}
+
+.two {
+  display: flex;
+}
+.group-wind {
+  background-color: azure;
+  flex: 2;
+  font-size: 18px;
+  padding: 10px;
+  margin: 10px;
+  /* margin: 5px; */
+}
+
+.humidity {
+  background-color: azure;
+  font-size: 18px;
+  flex: 1;
+  justify-content: center;
+
+  margin-left: 50px;
+  padding: 10px;
+  margin: 10px;
+
+  padding-top: 15%;
+}
+
+.humidity-two {
+  margin-top: 50%;
+  background-color: #313131;
+}
+
+.wrapper {
+  display: flex;
+}
+
+div.scrollmenu {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+
+.list {
+  display: inline-block;
+  margin: 10px;
+  background-color: azure;
+  padding: 15px;
+}
+.padding {
+  padding-top: 20px;
+}

@@ -1,3 +1,4 @@
+import './Style.css';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -11,12 +12,13 @@ function BasicInfo() {
 
     const [query, setQuery] = useState('');
     const [data, setData] = useState({});
+    const [show, setShow] = useState(false);
 
     const history = useHistory();
 
     useEffect(() => {
         if (data?.location) {
-            // Set time out
+
             setTimeout(() => {
                 search()
             }, 300000); // 1000 = 1 second
@@ -32,17 +34,21 @@ function BasicInfo() {
                     console.log("API Success\n");
                     console.log(result);
                     setData(result);
+                    if (!result.error) {
+                        setShow(true);
+                    } else { setShow(false) }
                 },
                 (error) => {
                     console.log("API Failed\n");
                     console.log(error);
                     setData(error);
+                    setShow(false);
                 }
             );
     }
 
     return (
-        <div className="App">
+        <div className="Style">
 
             <div className="search-box">
                 <input
@@ -52,28 +58,52 @@ function BasicInfo() {
                     onChange={e => setQuery(e.target.value)}
                     value={query}
                 />
+                <button className="button" type="button" onClick={(e) => search()}>Search</button>
             </div>
-
-            <button type='button' onClick={(e) => search()}>Get Info</button>
-
-            {(data !== undefined) ? (
+            {show ? <div>
                 <div>
-                    <p>{data.location?.name}</p>
-                    <p>{data.location?.region}</p>
-                    <p>{data.location?.country}</p>
-                    <p>{data.current?.temp_c}&#8451;</p>
-                    <p>{data.current?.condition.text}</p>
-                    {/* <p>{data.current?.condition.icon}</p> */}
-                    <img src={data.current?.condition.icon} alt="" />
-                    <p>{data.current?.wind_kph}</p>
-                    <p>{data.current?.wind_degree}</p>
-                    <p>{data.current?.wind_dir}</p>
-                    <p>{data.current?.humidity}</p>
-                    <p>{data.current?.feelslike_c}</p>
+                    <div className="container">
+                        <div className="group-zero wrapper">
+                            <div className="group-a">
+                                <p>Measured: {data.current?.temp_c}&#8451;</p>
+                                <p>Feels like {data.current?.feelslike_c}&#8451;</p>
+                            </div>
 
-                    <p>list?</p>
-                    <div>{data.forecast?.forecastday.map(forcast_day => (
-                        <div key={forcast_day.date_epoch}>
+                            <div className="group-b">
+                                <img src={data.current?.condition.icon} alt={data.current?.condition.text} />
+                                <div>{data.current?.condition.text}</div>
+                            </div>
+
+                            <div className="group-c">
+                                <p>{data.location?.name}</p>
+                                <div>
+                                    {data.location?.region}, {data.location?.country}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="container-two">
+                        <div className="two">
+                            <div className="group-wind">
+                                <p>Wind</p>
+                                <p>Speed: {data.current?.wind_kph}km/h</p>
+                                <p>Degree: {data.current?.wind_degree}°</p>
+                                <p>Direction: {data.current?.wind_dir}</p>
+                            </div>
+
+                            <div className="humidity">
+                                <div classname="humidity-two">
+                                    <p>Humidity</p>
+                                    <p>{data.current?.humidity}%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div >{data.forecast?.forecastday.map(forcast_day => (
+                        <div className="list" key={forcast_day.date_epoch}>
 
                             <div onClick={() => history.push({
                                 pathname: '/forcast',
@@ -84,15 +114,20 @@ function BasicInfo() {
                                 }
 
                             })}>
-                                <p>Max temperature</p>
-                                <p>{forcast_day.day.maxtemp_c}</p>
+                                <div>Date: {forcast_day.date}</div>
+                                <div>Max:{forcast_day.day.maxtemp_c}&#8451;</div>
+                                <div>Min: {forcast_day.day.mintemp_c}&#8451;</div>
+                                <div>Average: {forcast_day.day.avgtemp_c}&#8451;</div>
+                                <div>Condition: {forcast_day.day.condition.text}</div>
+                                <img src={forcast_day.day.condition.icon} alt={forcast_day.day.condition.text} />
+                                <div><a href="/forcast">Details</a></div>
                             </div>
                         </div>
                     ))}</div>
 
                 </div>
-
-            ) : ('')}
+            </div>
+                : null}
         </div >
     );
 }
